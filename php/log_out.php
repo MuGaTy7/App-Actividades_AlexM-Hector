@@ -9,11 +9,11 @@
 </head>
 <body>
     <?php
-    session_start();
+    session_start(); // RECUPERAMOS LA SESIÓN
 
-    session_destroy();
+    session_destroy(); // DESTRUIMOS O ELIMINAMOS LA SESIÓN
     ?>
-    
+    <!-- SCRIPT PARA REDIRIGIR AL INDEX UNA VEZ HAYAMOS CERRADO/ELIMINADO LA SESIÓN -->
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
                 <script>
                     function aviso(url) {
@@ -29,7 +29,6 @@
                                 }
                             })
                     }
-
                     aviso('../index.html');
     </script>
 </body>

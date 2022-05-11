@@ -17,12 +17,13 @@
 </head>
 
 <body>
-
-    <a href="./actividades.php"><button class="btn_volver"><</button></a>
+    <!-- ENVAIMOS EL FORMULARIO A CREAR USUARIO PARA ALLI RECOGER LOS DATOS Y PODER HACER EL INSERT INTO EN LA BD. -->
+    <a href="../index.html"><button class="btn_volver"><</button></a>
     <form action="../php/crearUsuario.php" method="post">
         <h1><span>Crear</span> Cuenta</h1>
         <p class="text">Regístrate para ver fotos y vídeos de tus amigos y poder compartir contenido de tu escuela :)</p>
         <?php
+        // MIRARA SI LE HAN ENVIADO ALGO POR LA URL, EN ESTE CASO, DESDE CREAR USUARIO Y SI HAY ALGO NOS SALTARA ESE MENSAJE Y SINO NO PASARA NADA.
             if (isset($_GET['registro'])) {
                 echo '<p>Ups! Te has dejado algun campo vacío!</p>';
             }

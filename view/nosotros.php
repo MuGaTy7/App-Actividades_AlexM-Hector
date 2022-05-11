@@ -34,7 +34,8 @@
                     </li>
 
                     <?php
-                    session_start();
+                    session_start(); // INICIAMOS LA SESION
+                    // INICIAMOS LA SESION Y BASICAMENTE LO QUE HACEMOS ES COMPROBAR QUE HAYA SESION, SI LA HAY MIS ACTIVIDADES REDIRIGIRÁ A MISACTIVIDADES Y SINO HAY SESION REDIRIGIRÁ AL LOGIN.
                     if(isset($_SESSION["nombre_usu"])) {
                         echo "<li class='nav-item'>";
                             echo "<a class='nav-link' href='./mis.actividades.php'>Mis actividades</a>";
@@ -53,6 +54,7 @@
                     <a href='../php/btn_upload.php'><button class='btn btn-light form-control me-1' type='button'><i
                         class='fa-solid fa-arrow-up-from-bracket'></i></button></a>
                         <?php
+                            // AQUI HACEMOS ALGO PARECIDO A LO DE ARRIBA, SI HAY SESION APRECERA UN BOTON DE LOG OUT Y SINO LA HAY NOS SALDRA EL BOTON DE ACCEDER PARA INICIARLA.
                             if(isset($_SESSION["nombre_usu"])){
                                 echo "<a href='../php/log_out.php'><button class='btn btn-light form-control ms-1' type='button'>Log out</button></a>";
                             }else{
@@ -69,6 +71,7 @@
     <div class="row-c padding-m">
         <div class="column-66 padding-m padding-right">
             <h5>Topics</h5>
+            <!-- AQUI EN CADA BOTON LO QUE HACEMOS ES ENVIAR POR LA URL EL TOPIC POR EL QUE QUEREMOS FILTRAR PARA QUE ASI EN TOPIC.PHP PODAMOS FILTRAR POR ESE TOPIC, COMPARANDO EN LA BD AQUELLAS ACTIVIDADES QUE TENGAN ESE ATRIBUTO.  -->
             <a href="./topic.php?topic=matematicas"><button type="button" class="btn btn-primary mt-1">matemáticas</button></a>
             <a href="./topic.php?topic=informatica"><button type="button" class="btn btn-info mt-1">informática</button></a>
             <a href="./topic.php?topic=deportes"><button type="button" class="btn btn-danger mt-1">deportes</button></a>
@@ -104,26 +107,27 @@
         <div class="column-1 padding-s">
 
             <?php
-
                 $connection = mysqli_connect('localhost', 'root', '', 'bd_ourschool');
+                /*
+                Con esta consulta mostraremos todas las actividades pero quedandos con las que cumplan el requisito de ser publicas ( en opción_actividad).
+                Además las motraremos en un order para qedarnos con las últimas actividade subidas, para ello lo ordenaremos por id_activida de forma descediente,
+                debido a que la primera actividad contine el id 1, la segunda el 2… y ponemos un limite 4 y de esta forma nos quedaremos con las cuatro últimas.
+                */
                 $sql = "SELECT * FROM tbl_actividad WHERE opcion_actividad = 'Publico' ORDER BY id_actividad DESC LIMIT 4;";
                 $query= mysqli_query($connection, $sql);
 
-                $ruta = $_SERVER['SERVER_NAME']."/www/App-Actividades_AlexM-Hector/img/";
+                $ruta = "../img/"; // RUTA RELATIVA DE LA FOTO
 
                 foreach ($query as $recientes) {
-                    $rutacompleta = "http://".$ruta.$recientes['foto_actividad'];
+                    $rutacompleta = $ruta.$recientes['foto_actividad'];
 
                     echo "<div class='column-4 padding-s'>";
+                        // ESTO ESTA HECHO PARA QUE AL HACER CLICK EN UNA FOTO ESTA NOS REDIRIGA A ACTIVIDAD Y ENVIE POR LA URL EL ID DE ESA ACTIVIDAD QUE ESTAMOS PULSANDO.
                         echo "<a href='./actividad.php?id={$recientes['id_actividad']}'><img src='{$rutacompleta}' class='target'></a>";
                     echo "</div>";
                 }
 
-              
-
-            ?>
-
-            
+            ?> 
         </div>
     </div>
 

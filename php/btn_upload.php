@@ -12,9 +12,9 @@
 </body>
 </html>
 <?php
-
+// INICIAMOS LA SESION
 session_start();
-
+// Y AQUI LO QUE HACEMOS ES VER SI HAY SESION INICIADA, SI LA HAY PODREMOS IR AL FORMULARIO PARA SUBIR ACTIVIDADES Y SINO LA HAY NOS REDIRIGIRÁ AL LOGIN.
 if(isset($_SESSION["nombre_usu"])){
     header("Location: ../view/subir.actividad.php");
 }else{

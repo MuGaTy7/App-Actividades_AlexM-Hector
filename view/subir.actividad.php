@@ -17,12 +17,13 @@
 
 <body>
     <a href="./actividades.php"><button class="btn_volver"><</button></a>
-
+    <!-- ENVIAMOS EL FORMUALRIO A SUBIR_ACT PARA ASI INSERTAR LOS DATOS EN TBL_ACTIVIDAD, PARA CREAR UNA NUEVA ACTIVIDAD. -->
     <form action="../php/subir_act.php" method="post" enctype="multipart/form-data">
         <h1><span>Publicar</span> Post</h1>
         <input placeholder="Introduce un titulo..." type="text" name="titulo" required/>
         <input placeholder="Escriba una descripción para la publicación..." type="text" name="descripcion" required/>
         <input type="file" name="foto" placeholder="Inserte una fotografía..." required>
+        <!-- TOPICS -->
         <select name="topic" required>
             <option>Matematicas</option>
             <option>Informatica</option>
@@ -30,6 +31,7 @@
             <option>Deportes</option>
         </select>
         <br><br>
+        <!-- OPCION: PUBLICO (visible para otros usuarios) O PRIVADO (solo lo podrá ver aquella persona que lo suba) -->
         <div>
             <label for="opcion">Público</label>
             <input type="radio" name="opcion" value="true" required>

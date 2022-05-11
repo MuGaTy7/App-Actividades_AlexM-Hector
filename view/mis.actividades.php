@@ -53,7 +53,6 @@
     session_start();
     $usuario = $_SESSION['nombre_usu']; // variable con el nombre del usuario
     
-
     echo "<div class='row-c'>";
         echo "<div class='column-1 padding-m'>";
             echo "<h4 class='padding-m'>Actividades de $usuario</h4>";
@@ -72,11 +71,9 @@
             $sql = "SELECT * FROM tbl_actividad WHERE usuario_fk = $id_usuario;";
             $listado_mis_act = mysqli_query($connection, $sql);
 
-            $numero_filas = mysqli_num_rows($listado_mis_act);
-
-            $ruta = $_SERVER['SERVER_NAME']."/www/App-Actividades_AlexM-Hector/img/";
+            $ruta = "../img/"; // RUTA RELATIVA DE LA FOTO
             foreach ($listado_mis_act as $mis_actividades) {
-                $rutacompleta = "http://".$ruta.$mis_actividades['foto_actividad'];
+                $rutacompleta = $ruta.$mis_actividades['foto_actividad'];
             // ESTRUCTURA PARA VER LAS FOTOS CON ESTILOS Y UN COLUMN DEL 33%:
                 echo "<div class='column-3 padding-mobile'>";
                     echo "<a href='./actividad.php?id={$mis_actividades['id_actividad']}'><img src='{$rutacompleta}' class='target'></a>";

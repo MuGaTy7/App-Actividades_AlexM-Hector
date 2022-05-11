@@ -16,10 +16,12 @@
 </head>
 
 <body>
+    <!-- ENVIAMOS EL FORMULARIO DE LOGIN A LOGIN USUARIO PARA ALLI RECOGER LOS DATOS Y COMPROBARLOS CON LOS DE LA BD Y SI COINCIDEN PERMITIR AL USUARIO ENTRAR -->
     <a href="../index.html"><button class="btn_volver"><</button></a>
     <form action="../php/loginUsuario.php" method="post">
         <h1><span>Iniciar</span> Sesión</h1>
         <?php
+        // AQUI LO QUE HAREMOS SERA RECOGER EL MENSAJE QUE ENVIAMOS DESDE EL LOGIN USUARIO Y SI ESTE TIENE ALGO, ES DECIR, NO ESTA VACIO, LO QUE QUERRÁ DECIR QUE HAY ALGO INCORRECTO NOS SALTARA ESE MENSAJE.
             if (isset($_GET['login'])) {
                 echo '<p>Usuario y/o contraseña incorrectos! :(</p>';
             }

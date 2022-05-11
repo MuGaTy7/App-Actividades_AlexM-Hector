@@ -34,6 +34,7 @@
                     </li>
 
                     <?php
+                    // INICIAMOS LA SESION Y BASICAMENTE LO QUE HACEMOS ES COMPROBAR QUE HAYA SESION, SI LA HAY MIS ACTIVIDADES REDIRIGIRÁ A MISACTIVIDADES Y SINO HAY SESION REDIRIGIRÁ AL LOGIN.
                     session_start();
                     if(isset($_SESSION["nombre_usu"])) {
                         echo "<li class='nav-item'>";
@@ -53,6 +54,7 @@
                         <a href='../php/btn_upload.php'><button class='btn btn-light form-control me-1' type='button'><i
                         class='fa-solid fa-arrow-up-from-bracket'></i></button></a>
                         <?php
+                        // AQUI HACEMOS ALGO PARECIDO A LO DE ARRIBA, SI HAY SESION APRECERA UN BOTON DE LOG OUT Y SINO LA HAY NOS SALDRA EL BOTON DE ACCEDER PARA INICIARLA.
                             if(isset($_SESSION["nombre_usu"])){
                                 echo "<a href='../php/log_out.php'><button class='btn btn-light form-control ms-1' type='button'>Log out</button></a>";
                             }else{
@@ -63,25 +65,25 @@
             </div>
         </div>
     </nav>
-    <!-- Top -->
+    <!-- Top 5-->
     <div class="row-c padding-m">
         <h4 class="column-1 padding-m">Top 5</h4>
 
         <div class="column-1 padding-s">
             <div class="column-5 padding-s">
-                <img src="../img/keila-hotzel-lFmuWU0tv4M-unsplash.jpg" alt="" class="target-s">
+                <img src="../img/Nathan_Swift.jpg" alt="" class="target-s">
             </div>
             <div class="column-5 padding-s">
-                <img src="../img/susanna-marsiglia-Yjr6EafseQ8-unsplash.jpg" alt="" class="target-s">
+                <img src="../img/Nathan_Swift.jpg" alt="" class="target-s">
             </div>
             <div class="column-5 padding-s">
-                <img src="../img/dan-cristian-padure-QQkQcaz7qmY-unsplash.jpg" alt="" class="target-s">
+                <img src="../img/Nathan_Swift.jpg" alt="" class="target-s">
             </div>
             <div class="column-5 padding-s">
-                <img src="../img/nick-fewings-EkyuhD7uwSM-unsplash.jpg" alt="" class="target-s">
+                <img src="../img/Nathan_Swift.jpg" alt="" class="target-s">
             </div>
             <div class="column-5 padding-s">
-                <img src="../img/etienne-girardet-j2Soo4TfFMk-unsplash.jpg" alt="" class="target-s">
+                <img src="../img/Nathan_Swift.jpg" alt="" class="target-s">
             </div>
 
         </div>
@@ -97,21 +99,24 @@
             <?php
 
             $connection = mysqli_connect('localhost', 'root', '', 'bd_ourschool');
+            // AQUÍ SELECIONAMOS TODO DE TODAS AQUELLAS ACTIVIDADES QUE TENGAN LA OPCION DE PUBLICO, EN EL CASO DE ESTAR EN PRIVADAS NO LAS COGEREMOS.
             $sql = "SELECT * FROM tbl_actividad WHERE opcion_actividad = 'Publico';";
             $listado_act = mysqli_query($connection, $sql);
 
-            $numero_filas = mysqli_num_rows($listado_act);
+            // $numero_filas = mysqli_num_rows($listado_act);
 
-            $ruta = $_SERVER['SERVER_NAME']."/www/App-Actividades_AlexM-Hector/img/";
+            $ruta = "../img/";
+            // PARA RECORRER ESOS CAMPOS LO HAREMOS CON EL FOREACH, SELECIONANDO LOS CAMPOS DE LA BD:
             foreach ($listado_act as $actividades) {
-                $rutacompleta = "http://".$ruta.$actividades['foto_actividad'];
-                // ESTRUCTURA PARA VER LAS FOTOS CON ESTILOS Y UN COLUMN DEL 33%:
+                $rutacompleta = $ruta.$actividades['foto_actividad'];
+                // ESTRUCTURA PARA VER LAS FOTOS CON ESTILOS Y UN COLUMN DEL 33%, PARA QUE OCUPEN :
                 echo "<div class='column-3 padding-mobile'>";
+                    // ESTO ESTA HECHO PARA QUE AL HACER CLICK EN UNA FOTO ESTA NOS REDIRIGA A ACTIVIDAD Y ENVIE POR LA URL EL ID DE ESA ACTIVIDAD QUE ESTAMOS PULSANDO.
                     echo "<a href='./actividad.php?id={$actividades['id_actividad']}'><img src='{$rutacompleta}' class='target'></a>";
 
                     echo "<div style='float: right;' class='padding-m'>";
                         echo "<button class='btn btn-light m-1' type='submit'><i class='fa-solid fa-link'></i></button>";
-
+                    // SI HAY SESION EL BOTON DEL CORAZON REDIRIGIRA PARA PODER DAR LIKE Y SI NO HAY SESION REDIRIGIREMOS AL LOGIN.
                         if(isset($_SESSION["nombre_usu"])){
                             echo "<a href='./actividad_like.php'><button class='btn btn-light m-1' type='submit'><i class='fa-solid fa-heart'></i></button></a>";
                         }else{

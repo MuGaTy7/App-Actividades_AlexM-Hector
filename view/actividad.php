@@ -18,22 +18,23 @@
     <?php
     // RECOGEMOS EN UNA VARIABLE EL ID DE LA FOTO QUE ENVIAMOS POR LA URL:
     $id_act = $_GET['id'];
-    // SELECIONAMOS TODO EL CONTENIDO DE DICHA FOTO:
+    // SELECIONAMOS TODO EL CONTENIDO DE DICHA FOTO CON LA CONSULTA SQL3:
     $connection = mysqli_connect('localhost', 'root', '', 'bd_ourschool');
     $sql3 = "SELECT * FROM tbl_actividad WHERE id_actividad = $id_act;";
     $find = mysqli_query($connection, $sql3);
-    
-    $ruta = $_SERVER['SERVER_NAME']."/www/App-Actividades_AlexM-Hector/img/";
-
+    // ESTA ES LA RUTA RELATIVA, PARA PODER VER LAS FOTOS DESDE CUALQUIER MÁQUINA, YA QUE SOLO ES NECESARIO TENER DESCARGADO EL DIRECTORIO DE LA ACTIVIDAD
+    $ruta = "../img/";
+    // HACEMOS UN FOREACH DE LA CONSULTAA QUE CONTIENE TODOS LOS DATOS DE LA ACTIVIDAD Y LO RECORREMOS PARA IR SELECIONANDO EL QUE QUERAMOS, Y LOS PRINTEAMOS CON UN ECHO.
     foreach ($find as $actividad) {
-        $rutacompleta = "http://".$ruta.$actividad['foto_actividad'];
+        $rutacompleta = $ruta.$actividad['foto_actividad'];
         echo "<a href='./actividades.php'><button class='btn_volver'><</button></a>";
         echo "<div>";
             echo "<p><b>Nombre: </b>".$actividad['nombre_actividad']."</p>";
             echo "<img src='{$rutacompleta}' class='target'>";
-            echo "<p style='margin-top: 16px;'><b>Descripción: </b>".$actividad['desc_actividad']."</p>";
+            echo "<p style='margin-top: 16px;'><b>Autor: </b>".$actividad['autor_actividad']."</p>";
+            echo "<p><b>Descripción: </b>".$actividad['desc_actividad']."</p>";
             echo "<p><b>Opción: </b>".$actividad['opcion_actividad']."</p>";
-            echo "<p><b>Topic: </b>".$actividad['topic_actividad']."</p>";
+            echo "<p style='margin-bottom: 5px;'><b>Topic: </b>".$actividad['topic_actividad']."</p>";
         echo "</div>";
     }
     ?>
