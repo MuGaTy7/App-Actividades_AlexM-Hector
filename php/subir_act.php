@@ -33,7 +33,7 @@
         $publico_privado = "Privado";
     }
 
-    $path = "/www/App-Actividades_AlexM-Hector/img"; // PARA SUBIR LA ACTIVIDAD SI QUE PONDREMOS LA RUTA RELATIVA PARA ASI PODER SUBIR LA FOTO DESDE CUALQUIER DIRECTORIO DE NUESTRO PC.
+    $path = "../img"; // RUTA RELATIVA DEL DIRECTORIO DE IMG DE NUESTRA ACTIVIDAD QUE ES DONDE METEREMOS TODAS LAS FOTOS QUE QUERAMOS SUBIR.
     $destino = $_SERVER['DOCUMENT_ROOT'].$path."/".$foto['name'];
 
     if(($foto['size']<1000*1024) && ($foto['type']=="image/jpeg" || $foto['type']=="image/png" || $foto['type']=="image/gif")) {
